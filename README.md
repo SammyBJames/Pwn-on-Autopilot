@@ -229,3 +229,28 @@ r = s.get('http://target.local/dashboard')
 ```
 
 To dive deeper, see the [Requests Reference](reference/requests.md).
+
+### `BeautifulSoup` (`bs4`)
+When writing web exploitation scripts, we need to interact with and extract data from HTML strings. `BeautifulSoup` turns HTML into cleanly searchable Python objects.
+
+The two most common use cases are extracting CSRF tokens for brute-forcing scripts and scraping targets for links or hidden data.
+
+```python
+import requests
+from bs4 import BeautifulSoup
+
+r = requests.get('https://example.com/login')
+
+# Parse the raw HTML text into a searchable object
+soup = BeautifulSoup(r.text, 'html.parser')
+
+# Look for a tag like: <input name="csrf_token" value="abc123xyz">
+token_input = soup.find('input', {'name': 'csrf_token'})
+
+if token_input:
+    # Extract the 'value' attribute using .get()
+    token = token_input.get('value')
+    print(f'CSRF Token: {token}')
+```
+
+For more info, check out the [BeautifulSoup Reference](reference/bs4.md).
