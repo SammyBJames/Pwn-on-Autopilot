@@ -164,3 +164,7 @@ elf.write(elf.symbols['check_admin'], asm('nop') * 10)
 # Save the patched executable
 elf.save('./vuln_server_patched')
 ```
+
+## Resources
+- [`pwntools` Official Documentation](https://docs.pwntools.com/en/latest/)
+- [Pwntools Tutorials](https://github.com/Gallopsled/pwntools-tutorial)

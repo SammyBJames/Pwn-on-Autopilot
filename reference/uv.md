@@ -188,3 +188,7 @@ If you have an older project with a `requirements.txt` file, converting it to `u
     ```
 
     *Because `uv` caches downloads and wheels globally to make environment creation instant, it can take up lots of space over time. Run this periodically to free it up!*
+
+## Resources
+- [`uv` Official Documentation](https://docs.astral.sh/uv/)
+- [Managing Python Projects with uv (Real Python)](https://realpython.com/python-uv/)

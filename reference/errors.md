@@ -74,3 +74,7 @@ except Exception as e:
 finally:
     print("Closing the socket before we exit...")
 ```
+
+## Resources
+- [Python Errors and Exceptions Official Documentation](https://docs.python.org/3/tutorial/errors.html)
+- [How to Handle Exceptions in Python (Real Python)](https://realpython.com/python-exceptions/)

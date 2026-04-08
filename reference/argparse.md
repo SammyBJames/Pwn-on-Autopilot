@@ -127,3 +127,7 @@ def valid_ip(ip_str):
 # If user types --ip 999.abc, argparse will handle the error
 parser.add_argument('--ip', type=valid_ip, required=True)
 ```
+
+## Resources
+- [`argparse` Official Documentation](https://docs.python.org/3/library/argparse.html)
+- [Python Argparse Tutorial](https://docs.python.org/3/howto/argparse.html)

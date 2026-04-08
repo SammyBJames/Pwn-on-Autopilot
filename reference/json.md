@@ -68,3 +68,7 @@ try:
 except json.JSONDecodeError:
     print('Target did not return valid JSON!')
 ```
+
+## Resources
+- [Official `json` Documentation](https://docs.python.org/3/library/json.html)
+- [Working with JSON Data in Python (Real Python)](https://realpython.com/python-json/)

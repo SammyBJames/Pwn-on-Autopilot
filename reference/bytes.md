@@ -128,3 +128,7 @@ key = b'\xaa\xbb\xcc\xdd\xee\xff'
 # XOR each byte pair together
 xored = bytes([b1 ^ b2 for b1, b2 in zip(data, key)])
 ```
+
+## Resources
+- [`bytes` Official Documentation](https://docs.python.org/3/library/stdtypes.html#bytes)
+- [Handling Binary Data in Python (Real Python)](https://realpython.com/python-bytes/)

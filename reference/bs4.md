@@ -98,3 +98,7 @@ user_role = tag.get('data-role', 'Unknown')
 # strip=True removes whitespace
 profile_text = tag.get_text(separator=' ', strip=True) 
 ```
+
+## Resources
+- [`beautifulsoup4` Official Documentation](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+- [Web Scraping with BeautifulSoup (Real Python)](https://realpython.com/beautiful-soup-web-scraper-python/)

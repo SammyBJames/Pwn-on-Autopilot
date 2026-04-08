@@ -52,4 +52,6 @@ with open('capture.pcap', 'rb') as f:
     packet_id, flags, p_type, timestamp = struct.unpack(fmt, header_data)
 ```
 
-Beyond this reference, you can learn more about `struct` in the [official docs](https://docs.python.org/3/library/struct.html).
+## Resources
+- [`struct` Official Documentation](https://docs.python.org/3/library/struct.html)
+- [`struct` Module in Python (Geeks for Geeks)](https://www.geeksforgeeks.org/python/struct-module-python/)

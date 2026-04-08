@@ -76,3 +76,7 @@ shellcode = b'\x90\x90\x90\x90\xcc'
 with open('payload.bin', 'wb') as f:
     f.write(shellcode)
 ```
+
+## Resources
+- [Reading and Writing Files Python Tutorial](https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files)
+- [Reading and Writing Files (Real Python)](https://realpython.com/read-write-files-python/)

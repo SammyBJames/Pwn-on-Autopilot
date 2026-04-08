@@ -40,3 +40,7 @@ print(base64.b64encode(payload))
 # URL Safe: b'--__'
 print(base64.urlsafe_b64encode(payload))
 ```
+
+## Resources
+- [`base64` Official Documentation](https://docs.python.org/3/library/base64.html)
+- [RFC 4648 (Base64 Encoding)](https://datatracker.ietf.org/doc/html/rfc4648)
