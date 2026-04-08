@@ -20,9 +20,8 @@ This workshop aims to teach beginner to intermediate learners how to speed up th
     - `base64` for B64 encoding/decoding
     - `json` for working with JSON data
     - `requests` for HTTP interactions
-    - `struct` for parsing and forging binary data
-    - `pwntools` for CTFs and network interactions
     - `argparse` for command-line interfaces
+    - `pwntools` for CTFs and network interactions
 
 4. **Resources:**
     - Where to learn more
@@ -146,7 +145,7 @@ mutable = bytearray(b'\x41\x41\x41\x41') # bytearray(b'AAAA')
 mutable[0] = 0x42  # Overwrite first byte: bytearray(b'BAAA')
 ```
 
-For more details, see the [Bytes Reference](reference/bytes.md).
+For more details, see the [Bytes Reference](reference/bytes.md). You can also learn about structured packing and unpacking of binary data using `struct` in the [Struct Reference](reference/struct.md).
 
 ## Libraries
 
@@ -282,3 +281,30 @@ if args.verbose:
 ```
 
 For a deeper dive into validating files and options, check out the [Argparse Reference](reference/argparse.md).
+
+### `pwntools`
+`pwntools` is a CTF framework and exploit development library. It is a massive library that abstracts away the most frustrating parts of binary exploitation.
+
+Its biggest feature is the "Tube." You can use the same script to attack a local binary (`process()`) or a remote server (`remote()`). This means you can write and test your exploit locally, then point it at the target with a single line change (or CLI arg).
+
+```python
+from pwn import *
+
+# 1. Connect to the target (Change 'process' to 'remote' to launch against a real server)
+target = process('./vulnerable_app')
+# target = remote('10.10.10.50', 1337)
+
+# 2. Wait exactly for the prompt (no sleep() needed!)
+target.recvuntil(b'Enter Password: ')
+
+# 3. Pack an integer into raw 32-bit Little-Endian bytes, instantly
+payload = b'A' * 44 + p32(0xdeadbeef)
+
+# 4. Send the payload with a newline (\n)
+target.sendline(payload)
+
+# 5. Drop straight into the hacked shell!
+target.interactive()
+```
+
+Because this library is massive, check out the [Pwntools Reference](reference/pwntools.md) for more advanced features and techniques.
