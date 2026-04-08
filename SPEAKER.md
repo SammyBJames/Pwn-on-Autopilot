@@ -233,3 +233,93 @@ Strings are for human-readable text (`'admin'`), and bytes are for machine data 
 - **[SHOW]** The terminal printing the admin password.
 - **[OPEN]** `examples/starter/1_modified.json` so the audience can see the beautifully indented JSON with the backdoor user successfully injected.
 - **Tip:** Remind them that if they are grabbing JSON from a network request instead of a file, they use `loads(response.text)`!
+
+## Section 7: Libraries - `requests`
+
+### 1. Intro to Requests
+- **Explain:** `requests` is the backbone of web hacking. It's how we automate directory brute-forcing, interact with APIs, and send automated exploits.
+- **Goal:** Introduce GET requests, sending POST data, manipulating headers, and handling sessions.
+
+### 2. Live Coding 1: Basic GET and Response Data
+- **[OPEN]** `examples/starter/2_requests_basics.py`
+- **[WRITE]** Implement the basic GET request and dissect the response:
+
+    ```python
+    import requests
+    
+    # 1. Fetch data from httpbin
+    r = requests.get('https://httpbin.org/get')
+    
+    # 2. Extract cleanly
+    print(f'Status Code: {r.status_code}\n')
+    
+    print('Response Text (String):')
+    print(r.text)
+    
+    print('Response JSON (Dictionary):')
+    data = r.json()
+    print(data['url'])
+    print()
+    
+    print('Response Content (Bytes - first 20):')
+    print(r.content[:20])
+    print()
+    
+    print('Server Header:')
+    print(r.headers.get('Server'))
+    ```
+- **[RUN]** `uv run examples/starter/2_requests_basics.py`
+- **[SHOW]** The terminal printing the different variations of the data (text, dict, bytes) and headers.
+
+### 3. Live Coding 2: Headers, POST Data, and Errors
+- **Explain:** Many tests require custom headers (like spoofing the `User-Agent`) and sending form data. We also need to add error handling.
+- **[OPEN]** `examples/starter/3_requests_data.py`
+- **[WRITE]** Implement the POST request with the provided starter data:
+
+    ```python
+    import requests
+
+    headers = {'User-Agent': 'Pwn-on-Autopilot/1.0'}
+    data = {'username': 'admin', 'password': 'password123'}
+
+    try:
+        # Use data= for form data. (Use json= for Application/JSON)
+        r = requests.post('https://httpbin.org/post', headers=headers, data=data, timeout=3)
+        
+        response_data = r.json()
+        print('Headers sent:', response_data['headers']['User-Agent'])
+        print('Data sent:', response_data['form'])
+        
+    except requests.exceptions.ConnectionError:
+        print('Connection Error!')
+    except requests.exceptions.Timeout:
+        print('Timed out!')
+    ```
+- **[RUN]** `uv run examples/starter/3_requests_data.py`
+
+### 4. Live Coding 3: Sessions and Cookies
+- **Explain:** When writing an exploit for an authenticated endpoint, `requests.get()` forgets cookies between calls! You must use `requests.Session()`.
+- **[OPEN]** `examples/starter/4_requests_sessions.py`
+- **[WRITE]** Implement a cookie-setting endpoint call using a session:
+
+    ```python
+    import requests
+    
+    # The magical object that acts like a real web browser
+    s = requests.Session()
+    
+    # 1. "Log in" and receive a cookie
+    s.get('https://httpbin.org/cookies/set/session_token/admin_token')
+    
+    # 2. Access a "protected" route
+    r = s.get('https://httpbin.org/cookies')
+    
+    # Automatically parsed to JSON dict
+    data = r.json()
+    print('Session Cookies automatically sent:')
+    print(data)
+    ```
+
+- **[RUN]** `uv run examples/starter/4_requests_sessions.py`
+- **[SHOW]** The terminal confirming that the second request automatically injected our `admin_token` cookie!
+- **Tip:** Remind them that if they want to pass their script through Burp Suite/ZAP, they just define `proxies={'http':'http://127.0.0.1:8080'}` and set `verify=False`. It's clearly laid out in the reference doc!

@@ -193,3 +193,39 @@ with open('config.json', 'w') as f:
 ```
 
 For more info on handling JSON, see the [JSON Reference](reference/json.md).
+
+### `requests`
+The `requests` library is arguably the most important third-party Python package for hackers. Any web hacking will almost certainly involve `requests`.
+
+```python
+import requests
+
+# Set custom headers
+headers = {'User-Agent': 'Mozilla/5.0'}
+
+try:
+    # Make a simple GET request
+    r = requests.get('https://httpbin.org/get', headers=headers)
+    
+    # Check the status code
+    if r.status_code == 200:
+        # Print the response text
+        print(r.text)
+    else:
+        print(f'Unexpected status code: {r.status_code}')
+except requests.exceptions.ConnectionError:
+    print('Failed to connect to the target.')
+```
+
+`requests` can also handle sessions, automatically managing cookies across multiple requests (like logging in and accessing protected routes).
+
+```python
+# Use a Session to handle cookies between requests
+s = requests.Session()
+s.post('http://target.local/login', data={'user': 'admin', 'pass': '1234'})
+
+# The session automatically sends the cookie with subsequent requests
+r = s.get('http://target.local/dashboard')
+```
+
+To dive deeper, see the [Requests Reference](reference/requests.md).
