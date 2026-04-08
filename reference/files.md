@@ -54,7 +54,7 @@ with open('exploit.txt', 'w') as f:
 ```
 
 ## Binary Files
-In cybersecurity we constantly deal with non-text files like executables, memory dumps, and raw network packets.
+In cyber we constantly deal with non-text files like executables, memory dumps, and network packets.
 
 When you open a file in default text mode (`r`), Python automatically attempts to decode the data using an encoding like UTF-8. If the file is not encoded in UTF-8, this decoding process will inevitably fail and crash your script with a `UnicodeDecodeError`.
 

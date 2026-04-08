@@ -8,18 +8,19 @@ This workshop aims to teach beginner to intermediate learners how to speed up th
 
 1. **Setup:**
     - Install `uv`
-    - Create a virtual environment
+    - Create a project / virtual environment
     - Install packages (PyPI)
 
 2. **Review Basics:**
-    - File operations (read, write, different modes)
-    - Error handling (and catching abnormalities)
-    - Byte manipulation (encoding, decoding, bytearrays, modes, etc.)
+    - File operations (text/binary, operating modes)
+    - Error handling
+    - Bytes and byte arrays
 
 3. **Libraries:**
-    - Network `requests`
-    - `base64` encoding/decoding
-    - `json` parsing and manipulation
+    - `base64` for B64 encoding/decoding
+    - `json` for working with JSON data
+    - `requests` for HTTP interactions
+    - `struct` for parsing and forging binary data
     - `pwntools` for CTFs and network interactions
     - `argparse` for command-line interfaces
 
@@ -73,12 +74,12 @@ uv is a modern Python package and project manager written in Rust, much faster a
 
 5. **More information:**
 
-    uv is a very powerful tool with many features beyond just these basics. To explore more features, look at the [uv reference](reference/uv.md) in this repository, or check out the official documentation at [docs.astral.sh/uv](https://docs.astral.sh/uv/).
+    uv is a very powerful tool with many features beyond just these basics. To explore more features, look at the [uv Reference](reference/uv.md) in this repository, or check out the official documentation at [docs.astral.sh/uv](https://docs.astral.sh/uv/).
 
 ## Basics
 
 ### File Operations
-For Python file operations: always use the `with open()` context manager. It automatically closes the file for you when the block is finished, preventing locked files or memory leaks.
+For Python file operations, always use the `with open()` context manager. It automatically closes the file for you when the block is finished, preventing locked files or memory leaks.
 
 **File Modes:**
 - `r`: Read (default). Fails if the file doesn't exist.
@@ -104,5 +105,69 @@ with open('file.bin', 'rb') as f:
     print(data)
 ```
 
+For more on file operations, see the [Files Reference](reference/files.md).
+
+### Error Handling
+In cyber, we often deal with unpredictable targets and data. Servers timeout, files contain bad bytes, etc. Instead of letting your script crash halfway through an attack, handle your errors with `try`/`except` and log errors for debugging and analysis.
+
+```python
+try:
+    # Attempt a risky operation
+    print(10 / 0)
+except ZeroDivisionError:
+    # Handle the specific error so the script survives
+    print('Math error caught. Moving on to the next target!')
+```
+For a deeper dive into error handling, check out the [Errors Reference](reference/errors.md).
+
+### Bytes
+You will constantly work with raw bytes when dealing with network packets, compiled binaries, shellcode, and cryptography.
+
+**Strings vs. Bytes:**
+- **Strings (`str`):** Human-readable text (`'admin'`).
+- **Bytes (`bytes`):** Raw machine data represented as integers from 0 to 255 (`b'admin'` or `b'\x41'`).
+You cannot mix them directly; you must `.encode()` strings to bytes or `.decode()` bytes to strings.
+
+**Hexadecimal:**
+Binary data is often represented as hex. Python makes it easy to convert back and forth without messy loops:
+
+```python
+payload = b'\xca\xfe\xba\xbe'
+hex_payload = payload.hex() # 'cafebabe'
+
+converted_back = bytes.fromhex(hex_payload) # b'\xca\xfe\xba\xbe'
+```
+
+**Byte Arrays:**
+`bytes` are immutable (unchangeable). If you are constructing or mutating an exploit dynamically, convert it to a `bytearray`:
+
+```python
+mutable = bytearray(b'\x41\x41\x41\x41') # bytearray(b'AAAA')
+mutable[0] = 0x42  # Overwrite first byte: bytearray(b'BAAA')
+```
+
+For more details, see the [Bytes Reference](reference/bytes.md).
+
+## Libraries
+
+This section introduces you to some of the most critical Python libraries for automation and exploit development. This section makes up the bulk of the presentation part of the workshop. We will be working with the code in the `examples` folder. Youc an follow along using the starter templates in `examples/starter` or jump to the completed code in `examples/complete`.
+
+### `base64`
+Base64 encoding is everywhere in cybersecurity: HTTP Basic Auth, JSON Web Tokens (JWTs), email attachments, and encoded reverse shells. Python’s built-in `base64` module handles this natively. 
+
+The key thing to remember about `base64` in Python 3 is: **It requires and returns `bytes`, not `str` (strings).**
+
+```python
+import base64
+
+# Base64 encode the message (Remember to .encode() first!)
+message_bytes = 'super_secret'.encode('utf-8')
+encoded_bytes = base64.b64encode(message_bytes)
+
+# Print the encoded result
+print(encoded_bytes.decode('utf-8'))
+```
+
+For more info on standard and URL-safe base64 encoding, see the [Base64 Reference](reference/base64.md).
 
 

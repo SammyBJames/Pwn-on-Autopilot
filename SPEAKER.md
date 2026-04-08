@@ -1,5 +1,12 @@
 # Speaker Notes: Pwn on Autopilot
 
+## Section 0: Survey
+
+- On a scale of 1-5, how comfortable are you with Python?
+- How many of you have used `uv`?
+
+- Cover the agenda and open questions.
+
 ## Section 1: Setup & `uv`
 
 ### Why `uv`?
@@ -68,7 +75,7 @@ We want to make it easy to test out libraries without installing them globally o
 - **[RUN]** Show uvx with `sqlmap`.
 
     ```bash
-    uvx sqlmap -u http://target.com
+    uvx sqlmap -u http://target.local
     ```
 
     - Standalone execution: Run Python CLI tools without cluttering your system (like Node's `npx`).
@@ -95,3 +102,94 @@ Non-text files (executables, payloads, dumps) WILL crash Python using the standa
 - **[SHOW]** Point out the `<class 'bytes'>` type and the `b` prefix in the output (`b'\xde\xad\xbe\xef'`).
     - Strings and bytes are different!
 
+## Section 3: Error Handling
+
+### 1. The Hacker Mindset (EAFP)
+In cyber, targets are unpredictable. Rather than constantly checking conditions before acting ("Look Before You Leap"), Ask for Forgiveness Rather than Permission. Don't let your script running for 10 hours die! Print errors and variables to debug and find next steps.
+
+- **[WRITE]** `errors.py`: Show how a script completely survives a crash.
+
+    ```python
+    try:
+        print('Sending payload...')
+        1 / 0  # Simulating a crash, like a dropped connection
+    except ZeroDivisionError:
+        print('Payload failed, but the script keeps scanning!')
+    ```
+
+- **[RUN]** `uv run errors.py`
+- **[SHOW]** The script finishes completely and never shows a giant red stack trace.
+
+## Section 4: Byte Manipulation
+
+### 1. Strings vs. Bytes
+Strings are for human-readable text (`'admin'`), and bytes are for machine data / payload numbers (`b'\x41'`). Note that `\x41` is literally just the integer `65` beneath the hood. You cannot directly mix or concatenate them (`'flag: ' + b'\x41'` throws a `TypeError`). Always `.encode()` or `.decode()`.
+
+### 2. Live Coding Bytes
+- **[WRITE]** `bytes.py`: Show encoding and the hacker's best friend (`hex`).
+
+    ```python
+    text = 'secret_payload'
+    
+    # Needs to be encoded for the network socket!
+    raw = text.encode('utf-8')
+    print(raw)
+    
+    # Hex representation is a hacker staple for moving payloads
+    print(raw.hex())
+    print(bytes.fromhex('deadbeef'))
+    ```
+
+- **[RUN]** `uv run bytes.py`
+
+### 3. The `bytearray` Solution
+- **Explain:** Like strings, standard `bytes` are immutable! If you need to change the 4th byte of a saved 500-byte exploit payload, you must use a `bytearray`.
+- **[WRITE]** `bytes.py`: Modify your script to use a `bytearray`.
+
+    ```python
+    payload = bytearray(b'\x41\x41\x41\x41')
+    
+    # Modifying in place requires passing the integer (0-255)
+    payload[0] = 0xcc  
+    payload.append(0x90)
+    
+    # Cast back to immutable bytes if required
+    print(bytes(payload))
+    ```
+
+- **[RUN]** `uv run bytes.py`
+- **[SHOW]** The output showing `b'\xccAAA\x90'`, proving we mutated the payload cleanly in place!
+
+## Section 5: Libraries - `base64`
+
+### 1. Intro to Base64
+- **Explain:** Base64 is ubiquitous in cyber (HTTP Basic Auth, JWTs, payloads).
+- **Explain:** The golden rule in Python: `base64` functions **only accept and return bytes**, NOT strings! This is why we covered `.encode()` and `.decode()` earlier!
+
+### 2. Live Coding: Base64 Encode & Decode
+- **[OPEN]** `examples/starter/base64_example.py`
+- **Explain:** We have our starter string. We need to Base64 encode it and print it, then decode it back.
+- **[WRITE]** Fill in the implementation working towards the `complete` version:
+
+    ```python
+    import base64
+
+    message = 'pwn_on_autopilot_base64_demo'
+
+    # Base64 encode the message
+    message_bytes = message.encode('utf-8')
+    encoded_bytes = base64.b64encode(message_bytes)
+
+    # Print the encoded result (decode back to string for clean printing)
+    print(f"Encoded: {encoded_bytes.decode('utf-8')}")
+
+    # Base64 decode it back
+    decoded_bytes = base64.b64decode(encoded_bytes)
+    print(f"Decoded: {decoded_bytes.decode('utf-8')}")
+    ```
+
+- **[RUN]** `uv run examples/starter/base64_example.py`
+- **[SHOW]** The terminal output matching: 
+  `Encoded: cHduX29uX2F1dG9waWxvdF9iYXNlNjRfZGVtbw==`
+  `Decoded: pwn_on_autopilot_base64_demo`
+- **Tip:** If anyone asks about web hacking/JWTs breaking URLs with `+` and `/` characters, mention `urlsafe_b64encode` (which swaps them for `-` and `_`). It is documented in the repo reference.
