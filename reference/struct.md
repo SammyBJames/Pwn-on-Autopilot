@@ -1,18 +1,18 @@
 # Parsing Structured Binary (`struct`)
 The `struct` library is the your best friend for unpacking and packing contiguous binary data. The `int.from_bytes()` method is great for single integers, but if we are reading a custom binary file header with a 4-byte integer, a 2-byte short, and an 8-byte timestamp, `struct` can parse them all at once with a format string.
 
-## 1. Format Strings (Defining the Structure)
+## Format Strings (Defining the Structure)
 You define the structure of the binary data using format strings:
 - **Endianness:** `<` (Little-Endian), `>` (Big-Endian), `!` (Network Big-Endian, standard for network packets)
 - **Data Types:** 
-  - `B` / `b`: 1-byte (char)
-  - `H` / `h`: 2-byte (short)
-  - `I` / `i`: 4-byte (int)
-  - `Q` / `q`: 8-byte (long / long long)
-  - `s`: Byte string (`10s` means "read exactly 10 bytes as a string")
-  - `x`: Pad byte (skips or ignores a byte)
+    - `B` / `b`: 1-byte (char)
+    - `H` / `h`: 2-byte (short)
+    - `I` / `i`: 4-byte (int)
+    - `Q` / `q`: 8-byte (long / long long)
+    - `s`: Byte string (`10s` means "read exactly 10 bytes as a string")
+    - `x`: Pad byte (skips or ignores a byte)
 
-## 2. Unpacking Data
+## Unpacking Data
 Use `struct.unpack()` to extract integers and variables from raw bytes based on your format string.
 
 ```python
@@ -30,7 +30,7 @@ print(hex(p_type))    # '0xff'
 print(hex(timestamp)) # '0xddccbbaa'
 ```
 
-## 3. Packing Data
+## Packing Data
 Use `struct.pack()` to create your own headers or payloads from integers.
 
 ```python
@@ -39,7 +39,7 @@ forged_header = struct.pack('!IHB', 0xcafebabe, 0x02, 0x00)
 # Output: b'\xca\xfe\xba\xbe\x00\x02\x00'
 ```
 
-## 4. Avoiding Guesswork (`calcsize`)
+## Avoiding Guesswork (`calcsize`)
 Exploits fail instantly if you read the wrong number of bytes from a file or socket. Instead of doing the math in your head, ask `struct` exactly how many bytes to read using `calcsize()`.
 
 ```python

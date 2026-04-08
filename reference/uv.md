@@ -2,7 +2,7 @@
 
 uv is a modern Python package and project manager written in Rust, much faster and simpler than alternatives like `pip` and `virtualenv`. It will automatically install Python into your virtual environment, and will manage your dependencies and virtual environments for you.
 
-## 1. Install `uv`:
+## Install `uv`:
 
 - **macOS, Linux, and WSL:**
 
@@ -16,7 +16,7 @@ uv is a modern Python package and project manager written in Rust, much faster a
     powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
     ```
 
-## 2. Project Management
+## Project Management
 Most often, you'll be working in a project that you want to save and use across different systems. In these cases it's usually best to initialize a project and manage dependencies using a `pyproject.toml` file.
 
 - **Initialize a project:**
@@ -68,7 +68,7 @@ Most often, you'll be working in a project that you want to save and use across 
 
     *If you download or clone a Python project with a `pyproject.toml` file, run `uv sync` to sync your local environment with the declared dependencies and versions.*
 
-## 3. One-Off Scripts and Tools
+## One-Off Scripts and Tools
 Often you will want a single Python script without the clutter of a full project and `.venv` directory. We can use `uv` to run scripts with temporary dependencies or embed dependency metadata directly in the script itself!
 
 - **Run a script with temporary dependencies:**
@@ -102,7 +102,7 @@ Often you will want a single Python script without the clutter of a full project
 
     *`uvx` is a special command that allows you to run any executable from a package without installing it globally, similar to `npx` in the Node.js ecosystem. For example:*
 
-## 4. The Classic Workflow
+## The Classic Workflow
 If you prefer the old way of doing things, `uv` can also be used as a drop-in replacement for `pip` and `virtualenv` with blazing fast performance and better dependency resolution.
 
 - **Create a virtual environment:**
@@ -143,7 +143,7 @@ If you prefer the old way of doing things, `uv` can also be used as a drop-in re
 
     *Runs the script using the Python interpreter from the active environment. The environment does not need to be activated first.*
 
-## 5. Managing Python Versions
+## Managing Python Versions
 If the scripts or packages you are using require specific Python versions, `uv` will download them for you automatically and transparently.
 
 - **Run a script with a specific version:**
@@ -165,10 +165,10 @@ If the scripts or packages you are using require specific Python versions, `uv` 
     ```
     *Creates a `.python-version` file that specifies the Python version for the project. Any `uv run` commands in this directory will now automatically use the pinned Python version.*
 
-    > [!NOTE]
-    > If you have already installed packages, you may need to edit the `requires-python` field of your `pyproject.toml` to specify the new version and run `uv sync` to update the environment.
+> [!NOTE]
+> If you have already installed packages, you may need to edit the `requires-python` field of your `pyproject.toml` to specify the new version and run `uv sync` to update the environment.
 
-## 6. Converting Old Pip Projects
+## Converting Old Pip Projects
 If you have an older project with a `requirements.txt` file, converting it to `uv` is incredibly easy. `uv` also offers a fully compatible, drop-in replacement interface for standard `pip`.
 
 - **Add dependencies from an old `requirements.txt`:**
@@ -179,7 +179,7 @@ If you have an older project with a `requirements.txt` file, converting it to `u
 
     *Installs all requirements into the active environment.*
 
-## 7. Clean Up
+## Clean Up
 
 - **Clean the Cache to free up space:**
 
