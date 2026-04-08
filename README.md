@@ -254,3 +254,31 @@ if token_input:
 ```
 
 For more info, check out the [BeautifulSoup Reference](reference/bs4.md).
+
+### `argparse`
+When you want to test payloads fast, or build reusable tools, you need to stop hardcoding parameters. `argparse` is Python's built-in module for building proper CLIs. It automatically generates help menus (`-h`) and validates user input for you.
+
+```python
+import argparse
+
+# Initialize the parser
+parser = argparse.ArgumentParser(description='Web Exploitation Script')
+
+# Add a required positional argument (order matters)
+parser.add_argument('target', help='The target IP address or URL')
+
+# Add an optional argument (starts with dashes)
+parser.add_argument('-p', '--port', type=int, default=80, help='Target port')
+
+# Add a boolean flag (true if passed, false otherwise)
+parser.add_argument('-v', '--verbose', action='store_true', help='Enable verbose output')
+
+# Parse the final arguments
+args = parser.parse_args()
+
+print(f'Target: {args.target}')
+if args.verbose:
+    print(f'Verbose mode ENABLED on port {args.port}')
+```
+
+For a deeper dive into validating files and options, check out the [Argparse Reference](reference/argparse.md).
