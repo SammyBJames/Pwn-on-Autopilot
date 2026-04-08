@@ -20,12 +20,12 @@ This workshop aims to teach beginner to intermediate learners how to speed up th
     - `base64` for B64 encoding/decoding
     - `json` for working with JSON data
     - `requests` for HTTP interactions
+    - `beautifulsoup4` for parsing HTML
     - `argparse` for command-line interfaces
     - `pwntools` for CTFs and network interactions
 
-4. **Resources:**
-    - Where to learn more
-    - Use AI to test, debug, and speed up scripting!
+4. **AI for Scripting:**
+    - Use AI to speed up scripting without getting off-track
 
 5. **Practice:**
     - Work on challenges to apply what you've learned and gain experience
@@ -308,3 +308,17 @@ target.interactive()
 ```
 
 Because this library is massive, check out the [Pwntools Reference](reference/pwntools.md) for more advanced features and techniques.
+
+## AI for Scripting & Review
+LLMs are incredible at speeding up scripting and generating code. They remove the friction of remembering syntax and let you focus on the logic of your attack. 
+
+Here are my recommendations for how to use AI effectively when writing hacking scripts:
+
+- **Verify Everything!:** If you let an LLM loose without supervision, it will cause you more harm than good. Always review all output carefully.
+- **Generate Boilerplate & Scaffold:** Never start from an empty file. Describe how the script should work, and let your LLM set up the project structure.
+- **Parsing:** Give the LLM a sample of the data and have it write the parser for you. Doing tedious tasks like this manually is a waste of time.
+- **Explaining & Deobfuscating:** Paste in confusing code or data and ask it to explain to you the logic or structure. Once you understand your target, you can better focus your exploits.
+- **Refactoring:** If you have a working prototype, give it to the LLM and ask it to make it faster or more efficient. For certain tasks, speed is critical.
+- **Debugging:** When you get an error, give it to an LLM with your project context and it will usually be able to decipher the message and point you in the right direction.
+
+For a full breakdown of my recommendations, see the [AI for Scripting Reference](reference/ai.md).
