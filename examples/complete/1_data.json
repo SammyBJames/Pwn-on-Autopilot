@@ -1,0 +1,12 @@
+{
+    "host": "10.0.0.5",
+    "ports": [
+        22,
+        80,
+        443
+    ],
+    "credentials": {
+        "admin": "supersecret",
+        "guest": "guest123"
+    }
+}

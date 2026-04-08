@@ -150,7 +150,7 @@ For more details, see the [Bytes Reference](reference/bytes.md).
 
 ## Libraries
 
-This section introduces you to some of the most critical Python libraries for automation and exploit development. This section makes up the bulk of the presentation part of the workshop. We will be working with the code in the `examples` folder. Youc an follow along using the starter templates in `examples/starter` or jump to the completed code in `examples/complete`.
+This section introduces you to some of the most critical Python libraries for automation and exploit development. This section makes up the bulk of the presentation part of the workshop. We will be working with the code in the `examples` folder. You can follow along using the starter templates in `examples/starter` or jump to the completed code in `examples/complete`.
 
 ### `base64`
 Base64 encoding is everywhere in cybersecurity: HTTP Basic Auth, JSON Web Tokens (JWTs), email attachments, and encoded reverse shells. Python’s built-in `base64` module handles this natively. 
@@ -170,4 +170,26 @@ print(encoded_bytes.decode('utf-8'))
 
 For more info on standard and URL-safe base64 encoding, see the [Base64 Reference](reference/base64.md).
 
+### `json`
+JSON is the universal language of web APIs, configs, and tooling output (like BloodHound or Nmap). Python interacts with JSON out of the box with the `json` module.
 
+The most important rule for the `json` library is the rule of "S" (String):
+- `json.load()` / `json.dump()`: For reading/writing directly to **Files**.
+- `json.loads()` / `json.dumps()`: For reading/writing from **Strings**.
+
+```python
+import json
+
+# Reading from a file
+with open('config.json', 'r') as f:
+    data = json.load(f)
+
+# Modifying the data since it's just a Python dictionary!
+data['debug'] = True
+
+# Overwriting the file with the new configuration
+with open('config.json', 'w') as f:
+    json.dump(data, f, indent=4)  # indent=4 pretty-prints it
+```
+
+For more info on handling JSON, see the [JSON Reference](reference/json.md).

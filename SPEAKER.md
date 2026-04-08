@@ -193,3 +193,43 @@ Strings are for human-readable text (`'admin'`), and bytes are for machine data 
   `Encoded: cHduX29uX2F1dG9waWxvdF9iYXNlNjRfZGVtbw==`
   `Decoded: pwn_on_autopilot_base64_demo`
 - **Tip:** If anyone asks about web hacking/JWTs breaking URLs with `+` and `/` characters, mention `urlsafe_b64encode` (which swaps them for `-` and `_`). It is documented in the repo reference.
+
+## Section 6: Libraries - `json`
+
+### 1. Intro to JSON
+- **Explain:** JSON is the backbone of modern web APIs, cloud IAM policies, and tooling outputs (like BloodHound or Nuclei).
+- **Explain:** Python handles JSON flawlessly by turning it directly into Python Dictionaries and Lists.
+- **Rule of Thumb:** Remember the rule of **"S"**! `load`/`dump` are for files, `loads`/`dumps` (load *strings*) are for string variables.
+
+### 2. Live Coding: Parsing and Modifying JSON
+- **[OPEN]** `examples/starter/1_data.json`
+- **[SHOW]** Briefly show the audience the mock data (A server with open ports, marked vulnerable, and admin credentials).
+- **[OPEN]** `examples/starter/1_json_example.py`
+- **Explain:** We are going to read this tool output from disk, print the admin password, inject our own backdoor user, and write the modified config back to disk.
+- **[WRITE]** Fill in the implementation:
+
+    ```python
+    import json
+    
+    # 1. Load the data using standard load() since it's a file
+    with open('1_data.json', 'r') as f:
+        data = json.load(f)
+    
+    # 2. Print the admin's password (It's just a Python dictionary now!)
+    print(f"Admin password: {data['credentials']['admin']}")
+    
+    # 3. Add a new backdoor user and patch the vulnerability status
+    data['credentials']['backdoor'] = 'pwned'
+    data['vulnerable'] = False
+    
+    # 4. Save the modified data using dump() back to a new file
+    with open('1_modified.json', 'w') as f:
+        json.dump(data, f, indent=4)  # Highlight indent=4!
+        
+    print('Successfully backdoored the JSON file!')
+    ```
+
+- **[RUN]** `uv run examples/starter/1_json_example.py`
+- **[SHOW]** The terminal printing the admin password.
+- **[OPEN]** `examples/starter/1_modified.json` so the audience can see the beautifully indented JSON with the backdoor user successfully injected.
+- **Tip:** Remind them that if they are grabbing JSON from a network request instead of a file, they use `loads(response.text)`!
