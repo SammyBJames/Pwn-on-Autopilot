@@ -40,6 +40,9 @@ response = r.recvline()
 
 # Send data after seeing a prompt (combines recvuntil + send)
 r.sendlineafter(b'Password: ', b'supersecret')
+
+# Read everything until the connection closes
+full_response = r.recvall()
 ```
 
 ### Getting an Interactive Shell
