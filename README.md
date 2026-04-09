@@ -51,19 +51,19 @@ uv is a modern Python package and project manager written in Rust, much faster a
     uv init --bare
     ```
 
+    For this workshop:
+
+    ```bash
+    uv init --bare --python 3.13 --pin-python
+    ```
+
 3. **Install packages:**
 
     ```bash
-    uv add <package-name>
+    uv add requests beautifulsoup4 pwntools
     ```
 
-    e.g. to install `requests`:
-
-    ```bash
-    uv add requests
-    ```
-
-    Find packages on [PyPI](https://pypi.org/).
+    Find more packages on [PyPI](https://pypi.org/).
 
 4. **Run your Python script:**
 
@@ -73,7 +73,7 @@ uv is a modern Python package and project manager written in Rust, much faster a
 
 5. **More information:**
 
-    uv is a very powerful tool with many features beyond just these basics. To explore more features, look at the [uv Reference](reference/uv.md) in this repository, or check out the official documentation at [docs.astral.sh/uv](https://docs.astral.sh/uv/).
+    uv is a very powerful tool with many features beyond just these basics. To explore more features, look at the [uv Reference](reference/uv.md) in this repository.
 
 ## Basics
 
