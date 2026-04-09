@@ -1,8 +1,6 @@
 # Pwn on Autopilot: Python for Hackers
 **Sam Bradley**
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-
 ## Overview
 This workshop aims to teach beginner to intermediate learners how to speed up their hacking using Python and some common libraries for cybersecurity and provides you with several challenges to gain experience and hone your skills. The workshop will be broken down into the following sections:
 
