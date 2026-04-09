@@ -320,3 +320,8 @@ Here are my recommendations for how to use AI effectively when writing hacking s
 - **Debugging:** When you get an error, give it to an LLM with your project context and it will usually be able to decipher the message and point you in the right direction.
 
 For a full breakdown of my recommendations, see the [AI for Scripting Reference](reference/ai.md).
+
+## Challenges
+The best way to learn is by doing. Use the techniques and libraries you've learned to solve the challenges at https://pwn.inmt.win/. You should be able to solve all the challenges using only the information in this workshop and the references, except for one extra tool you'll need to figure out for ZIP Drive. Write ups will be posted after the workshop in this repository.
+
+### [Go to Challenges](https://pwn.inmt.win/)
