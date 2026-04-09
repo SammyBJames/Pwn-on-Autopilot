@@ -11,8 +11,8 @@ This workshop aims to teach beginner to intermediate learners how to speed up th
 
 2. **Review Basics:**
     - File operations (text/binary, operating modes)
-    - Error handling
     - Bytes and byte arrays
+    - Error handling
 
 3. **Libraries:**
     - `base64` for B64 encoding/decoding
@@ -104,19 +104,6 @@ with open('file.bin', 'rb') as f:
 
 For more on file operations, see the [Files Reference](reference/files.md).
 
-### Error Handling
-In cyber, we often deal with unpredictable targets and data. Servers timeout, files contain bad bytes, etc. Instead of letting your script crash halfway through an attack, handle your errors with `try`/`except` and log errors for debugging and analysis.
-
-```python
-try:
-    # Attempt a risky operation
-    print(10 / 0)
-except ZeroDivisionError:
-    # Handle the specific error so the script survives
-    print('Math error caught. Moving on to the next target!')
-```
-For a deeper dive into error handling, check out the [Errors Reference](reference/errors.md).
-
 ### Bytes
 You will constantly work with raw bytes when dealing with network packets, compiled binaries, shellcode, and cryptography.
 
@@ -145,9 +132,22 @@ mutable[0] = 0x42  # Overwrite first byte: bytearray(b'BAAA')
 
 For more details, see the [Bytes Reference](reference/bytes.md). You can also learn about structured packing and unpacking of binary data using `struct` in the [Struct Reference](reference/struct.md).
 
+### Error Handling
+In cyber, we often deal with unpredictable targets and data. Servers timeout, files contain bad bytes, etc. Instead of letting your script crash halfway through an attack, handle your errors with `try`/`except` and log errors for debugging and analysis.
+
+```python
+try:
+    # Attempt a risky operation
+    print(10 / 0)
+except ZeroDivisionError:
+    # Handle the specific error so the script survives
+    print('Math error caught. Moving on to the next target!')
+```
+For a deeper dive into error handling, check out the [Errors Reference](reference/errors.md).
+
 ## Libraries
 
-This section introduces you to some of the most critical Python libraries for automation and exploit development. This section makes up the bulk of the presentation part of the workshop. We will be working with the code in the `examples` folder. You can follow along using the starter templates in `examples/starter` or jump to the completed code in `examples/complete`.
+This section makes up the bulk of the presentation and introduces you to some of the most critical Python libraries for automation and exploit development. We'll be working with the code in the `examples` folder. You can follow along using the starter templates in `examples/starter` or jump to the completed code in `examples/complete`.
 
 ### `base64`
 Base64 encoding is everywhere in cybersecurity: HTTP Basic Auth, JSON Web Tokens (JWTs), email attachments, and encoded reverse shells. Python’s built-in `base64` module handles this natively. 

@@ -136,7 +136,7 @@ libc = ELF('/lib/x86_64-linux-gnu/libc.so.6')
 # Imagine your exploit successfully leaks where 'puts' was loaded in memory:
 leaked_puts = 0x7f8a9b4c3d20 
 
-# We can now calculate the randomized ASLR Base with pwntools
+# We can now calculate the randomized ASLR base with pwntools
 libc.address = leaked_puts - libc.symbols['puts']
 
 # Now every symbol in the ELF is updated to the correct, real memory address

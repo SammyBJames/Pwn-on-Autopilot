@@ -1,9 +1,9 @@
 from pwn import *
 
 # Connect to a local binary
-# r = process('./7_vuln_linux') # or ./7_vuln_windows.exe or ./7_vuln_macos
+# r = process('./7_vuln')
 # Or connect to the remote server
-r = remote('pwn.inmt.win', 1337)
+r = remote('target.inmt.win', 1337)
 
 # Consume output until the server sends "Username: "
 r.recvuntil(b'Username: ')

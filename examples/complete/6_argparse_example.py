@@ -15,10 +15,10 @@ parser.add_argument('-v', '--verbose', action='store_true', help='Show all attem
 # Parse the arguments
 args = parser.parse_args()
 
-print(f'\n[*] Starting attack against: {args.target}')
-print(f'[*] Loading wordlist: {args.wordlist}')
+print(f'\nStarting attack against: {args.target}')
+print(f'Loading wordlist: {args.wordlist}')
 
 if args.verbose:
-    print('[!] Verbose logging ENABLED. Showing all failed attempts.')
+    print('Verbose logging ENABLED. Showing all failed attempts.')
 else:
-    print('[*] Verbose logging DISABLED. Only showing successful hits.')
+    print('Verbose logging DISABLED. Only showing successful hits.')
