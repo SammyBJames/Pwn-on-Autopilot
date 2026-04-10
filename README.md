@@ -1,8 +1,13 @@
 # Pwn on Autopilot: Python for Hackers
 **Sam Bradley**
 
+## Objectives
+This workshop is targeted towards beginners with some coding experience. This is by no means comprehensive and is meant to be a starting point to jump into scripting for cyber. We'll spend the first hour covering the setup and basics of several tools and libraries for web hacking, binary exploitation, and more with Python. The second hour you will get to explore the tools more in depth and apply them to real challenges. By the end of the workshop, you should have a solid foundation for writing your own scripts and automating your attacks.
+
+This repo has all of the example code from the presentation as well as reference guides you can use to explore the tools as you work through the challenges. The reference guides are meant to provide more detailed info about the features of each tool or library and have external links for further reading.
+
 ## Overview
-This workshop aims to teach beginner to intermediate learners how to speed up their hacking using Python and some common libraries for cybersecurity and provides you with several challenges to gain experience and hone your skills. The workshop will be broken down into the following sections:
+The workshop will be broken down into the following sections:
 
 1. **Setup:**
     - Install `uv`
@@ -25,8 +30,17 @@ This workshop aims to teach beginner to intermediate learners how to speed up th
 4. **AI for Scripting:**
     - Use AI to speed up scripting without getting off-track
 
-5. **Practice:**
+5. **Challenges:**
     - Work on challenges to apply what you've learned and gain experience
+
+## This Repo
+- `examples/` - The example code for the presentation
+    - `starter/` - Starter templates for you to follow along with
+    - `complete/` - Completed code for each example as I wrote it during the presentation
+- `reference/` - Reference guides for the tools and libraries
+- `challenges/` - The code and writeups for the challenges at https://pwn.inmt.win/
+- `README.md` - This file to follow along with the presentation
+- `SPEAKER.md` - My speaker notes for the presentation with key points and reminders
 
 ## Setup
 uv is a modern Python package and project manager written in Rust, much faster and simpler than alternatives. It will automatically manage Python, a virtual environment, and your dependencies for you.
