@@ -7,8 +7,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# Expose port for the challenge
-EXPOSE 8002
-
-# Run flask using a lightweight server, listening on all interfaces
-CMD ["python3", "app.py"]
+CMD ["python3", "main.py"]
