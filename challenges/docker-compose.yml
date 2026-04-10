@@ -1,0 +1,16 @@
+services:
+  chain_reaction:
+    build: ./02_chain_reaction/app
+    ports:
+      - 8000:8000
+    restart: unless-stopped
+  quick_maths:
+    build: ./04_quick_maths/app
+    ports:
+      - 8001:8001
+    restart: unless-stopped
+  secure_pin:
+    build: ./05_secure_pin/app
+    ports:
+      - 8002:8002
+    restart: unless-stopped

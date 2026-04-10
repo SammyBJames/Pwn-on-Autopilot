@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; margin-top: 50px; }
+        .box { display: inline-block; padding: 20px; border: 1px solid #ccc; background: #f9f9f9; }
+        input { margin: 5px; }
+        .error { color: red; font-weight: bold; }
+        .success { color: green; font-size: 1.2em; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>Admin Login</h1>
+        {% if message %}<p>{{ message }}</p>{% endif %}
+        {% if error %}<p class="error">{{ error }}</p>{% endif %}
+        {% if success %}<p class="success">{{ success }}</p>{% endif %}
+        {% if not success %}
+        <form method="POST" action="/">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" required><br><br>
+            
+            <label for="pin">PIN (4-digits):</label><br>
+            <input type="text" id="pin" name="pin" required pattern="[0-9]{4}"><br><br>
+            
+            <button type="submit">Login</button>
+        </form>
+        {% endif %}
+    </div>
+</body>
+</html>

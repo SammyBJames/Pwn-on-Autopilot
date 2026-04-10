@@ -325,3 +325,6 @@ For a full breakdown of my recommendations, see the [AI for Scripting Reference]
 The best way to learn is by doing. Use the techniques and libraries you've learned to solve the challenges at https://pwn.inmt.win/. You should be able to solve all the challenges using only the information in this workshop and the references, except for one extra tool you'll need to figure out for ZIP Drive. Write ups will be posted after the workshop in this repository.
 
 ### [Go to Challenges](https://pwn.inmt.win/)
+
+### Solutions
+The challenge code and solutions are posted in the [challenges](challenges/) folder. Each challenge has a `writeup.md` that explains how to solve the challenge as well as a `solve.py` with a sample solution. Try the challenges yourself first before reading the solutions!
